@@ -99,5 +99,11 @@ class MeetingCalculatorTest {
         List<Meeting> meetings2 = new ArrayList<>();
         meetings2.add(new Meeting(twelveThirty, fourteen));
         Assertions.assertEquals(0, meetingCalculator.calcOverlapped(meetings2));
+
+        List<Meeting> meetings3 = new ArrayList<>();
+        meetings3.add(new Meeting(eightThirty, tenThirty));
+        meetings3.add(new Meeting(nine, ten));
+        meetings3.add(new Meeting(ten, eleven));
+        Assertions.assertEquals(3, meetingCalculator.calcOverlapped(meetings3));
     }
 }

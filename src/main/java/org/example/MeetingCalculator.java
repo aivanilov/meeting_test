@@ -6,18 +6,17 @@ import java.util.List;
 public class MeetingCalculator {
 
     public long calcOverlapped(List<Meeting> meetings) {
-        meetings.sort(Comparator.comparingLong(Meeting::getEnd));
-        boolean[] overlaps
-                = new boolean[meetings.size()];
+        meetings.sort(Comparator.comparingLong(Meeting::getStart));
+        boolean[] overlaps = new boolean[meetings.size()];
 
-        for (int i = 0; i < meetings.size() - 2; i++) {
+        for (int i = 0; i < meetings.size() - 1; i++) {
             if (overlaps[i]) {
                 continue;
             }
 
             Meeting m1 = meetings.get(i);
 
-            for (int j = i + 1; j < meetings.size() - 1; j++) {
+            for (int j = i + 1; j < meetings.size(); j++) {
                 Meeting m2 = meetings.get(j);
 
                 if (overlap(m1, m2)) {
@@ -29,14 +28,14 @@ public class MeetingCalculator {
             }
         }
 
-        int ans = 0;
+        int count = 0;
         for (boolean overlap : overlaps) {
             if (overlap) {
-                ans++;
+                count++;
             }
         }
 
-        return ans;
+        return count;
     }
 
     public boolean overlap(Meeting m1, Meeting m2) {
