@@ -1,8 +1,8 @@
 package org.example;
 
 public class Meeting {
-    long start;
-    long end;
+    private final long start;
+    private final long end;
 
     public Meeting(long start, long end) {
         this.start = start;

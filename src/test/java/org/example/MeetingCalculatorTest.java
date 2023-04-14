@@ -67,4 +67,37 @@ class MeetingCalculatorTest {
         meetings.add(new Meeting(twelveThirty, fourteen));
         Assertions.assertEquals(90, meetingCalculator.calcMeetingMinutes(meetings));
     }
+
+    @Test
+    void overlapInversion() {
+        Meeting m1 = new Meeting(eleven, fourteen);
+        Meeting m2 = new Meeting(twelveThirty, sixteen);
+        boolean overlap1 = meetingCalculator.overlap(m1, m2);
+        boolean overlap2 = meetingCalculator.overlap(m2, m1);
+        Assertions.assertTrue(overlap1 && overlap2);
+
+        Meeting m3 = new Meeting(nine, ten);
+        Meeting m4 = new Meeting(eightThirty, tenThirty);
+        boolean overlap3 = meetingCalculator.overlap(m3, m4);
+        boolean overlap4 = meetingCalculator.overlap(m4, m3);
+        Assertions.assertTrue(overlap3 && overlap4);
+    }
+
+    @Test
+    void calcOverlapped() {
+        List<Meeting> meetings = new ArrayList<>();
+        meetings.add(new Meeting(eightThirty, tenThirty));
+        meetings.add(new Meeting(nine, ten));
+        meetings.add(new Meeting(ten, eleven));
+        meetings.add(new Meeting(twelveThirty, thirteenThirty));
+        meetings.add(new Meeting(thirteen, fourteen));
+        meetings.add(new Meeting(sixteen, seventeen));
+        meetings.add(new Meeting(seventeen, seventeenThirty));
+        meetings.add(new Meeting(seventeenFifteen, eighteenThirty));
+        Assertions.assertEquals(7, meetingCalculator.calcOverlapped(meetings));
+
+        List<Meeting> meetings2 = new ArrayList<>();
+        meetings2.add(new Meeting(twelveThirty, fourteen));
+        Assertions.assertEquals(0, meetingCalculator.calcOverlapped(meetings2));
+    }
 }
