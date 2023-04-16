@@ -1,5 +1,8 @@
 package org.example;
 
+import lombok.ToString;
+
+@ToString
 public class Meeting {
     private final long start;
     private final long end;
